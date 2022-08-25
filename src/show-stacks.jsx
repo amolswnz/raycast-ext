@@ -67,9 +67,17 @@ export default function NewGrid() {
           actions={
             <ActionPanel>
               <Action.OpenInBrowser url={getUrl(item)} />
-              <ActionPanel.Section title="Danger zone">
-                <Action.OpenInBrowser title="UAT" url={getLink(item, false)} />
-                <Action.OpenInBrowser title="Prod" url={getLink(item, true)} />
+              <ActionPanel.Section title="Which one?">
+                <Action.OpenInBrowser
+                  title="UAT"
+                  url={getLink(item, false)}
+                  icon={{ source: Icon.ChessPiece, tintColor: Color.Green }}
+                />
+                <Action.OpenInBrowser
+                  title="Prod"
+                  url={getLink(item, true)}
+                  icon={{ source: Icon.BullsEye, tintColor: Color.Yellow }}
+                />
               </ActionPanel.Section>
             </ActionPanel>
           }
