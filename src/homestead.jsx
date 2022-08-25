@@ -1,7 +1,9 @@
-import { ActionPanel, Action, List, useNavigation, Icon } from "@raycast/api";
+import { ActionPanel, Action, List, useNavigation, Icon, Color } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { runAppleScript } from "run-applescript";
-import  NewGrid  from './grid';
+import NewGrid from "./grid";
+import ShowStacks from "./show-stacks";
+import moment from "moment-timezone";
 
 export default function Command() {
   const [isLoading, setIsLoading] = useState(true);
@@ -150,43 +152,36 @@ export default function Command() {
           </ActionPanel>
         }
       />
-
+      <List.Item title="Blue" icon={{ source: Icon.Circle, tintColor: Color.Red }} />
       <List.Item
         title="Silverstripe cloud"
         subtitle="#ips"
-        icon={{ source: Icon.Cloud }}
+        icon={{ source: Icon.Cloud, tintColor: Color.Blue }}
         actions={
           <ActionPanel>
-            <Action
-              title="Open stack details"
-              onAction={() => {
-                openFileVsCode("etc:hosts");
-              }}
-            />
+            <Action title="Open stack details" onAction={() => push(<ShowStacks />)} />
           </ActionPanel>
         }
       />
-      <List.Section title="Lager">
-        <List.Item title="Camden Hells" />
+      <List.Section title="Timezones">
         <List.Item
-          title="An Item with Accessories"
+          title="India time"
           accessories={[
-            { text: `An Accessory Text`, icon: Icon.Hammer },
+            { text: `India text`, icon: Icon.Hammer },
             { icon: Icon.Person, tooltip: "A person" },
-            { text: "Just Do It!" },
-            { date: new Date() },
+            { text: "Just in time!" },
+            { text: moment().tz("Asia/Kolkata").format("HH:mm") },
           ]}
         />
-      </List.Section>
-      <List.Section title="IPA">
-        <List.Item title="Sierra Nevada IPA" actions={
-          <ActionPanel>
-            <Action
-              title="Open stack details"
-              onAction={() => push(<NewGrid />)}
-            />
-          </ActionPanel>
-        }/>
+        <List.Item
+          title="New Zealand time"
+          accessories={[
+            { text: `NZ Text`, icon: Icon.Hammer },
+            { icon: Icon.Person, tooltip: "A person" },
+            { text: "Just Do It!" },
+            { text: moment().tz("Pacific/Auckland").format("HH:mm") },
+          ]}
+        />
       </List.Section>
     </List>
   );
