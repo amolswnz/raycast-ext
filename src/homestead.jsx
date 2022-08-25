@@ -1,6 +1,7 @@
-import { ActionPanel, Action, List, Color, Icon } from "@raycast/api";
+import { ActionPanel, Action, List, useNavigation, Icon } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { runAppleScript } from "run-applescript";
+import  NewGrid  from './grid';
 
 export default function Command() {
   const [isLoading, setIsLoading] = useState(true);
@@ -82,8 +83,10 @@ export default function Command() {
 
   const openFileVsCode = (filename) => {
     // tell application "Visual Studio Code" to open file "etc:hosts"
-    runAppleScript(`tell application "Visual Studio Code" to open file "${filename}"`)
-  }
+    runAppleScript(`tell application "Visual Studio Code" to open file "${filename}"`);
+    // TODO: https://developers.raycast.com/api-reference/utilities#open
+  };
+  const { push } = useNavigation();
 
   return (
     <List navigationTitle="Homestead">
@@ -147,6 +150,44 @@ export default function Command() {
           </ActionPanel>
         }
       />
+
+      <List.Item
+        title="Silverstripe cloud"
+        subtitle="#ips"
+        icon={{ source: Icon.Cloud }}
+        actions={
+          <ActionPanel>
+            <Action
+              title="Open stack details"
+              onAction={() => {
+                openFileVsCode("etc:hosts");
+              }}
+            />
+          </ActionPanel>
+        }
+      />
+      <List.Section title="Lager">
+        <List.Item title="Camden Hells" />
+        <List.Item
+          title="An Item with Accessories"
+          accessories={[
+            { text: `An Accessory Text`, icon: Icon.Hammer },
+            { icon: Icon.Person, tooltip: "A person" },
+            { text: "Just Do It!" },
+            { date: new Date() },
+          ]}
+        />
+      </List.Section>
+      <List.Section title="IPA">
+        <List.Item title="Sierra Nevada IPA" actions={
+          <ActionPanel>
+            <Action
+              title="Open stack details"
+              onAction={() => push(<NewGrid />)}
+            />
+          </ActionPanel>
+        }/>
+      </List.Section>
     </List>
   );
 }

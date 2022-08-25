@@ -3,7 +3,7 @@
   "name": "laravel-homestead",
   "title": "Laravel homestead",
   "description": "Extends laravel homestead",
-  "icon": "command-icon.png",
+  "icon": "homestead.png",
   "author": "amolswnz",
   "license": "MIT",
   "commands": [
